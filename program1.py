@@ -4,16 +4,16 @@ class Solution(object):
         :type s: str
         :rtype: bool
         """
-        dict = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
-        result = 0
-        prev = 0
+        check = []
+        dict = {')': '(', '}': '{', ']': '['}
         for char in s:
-            num = dict[char]
-            result += num
-            if num > prev:
-                result -= 2 * prev
-            prev = num
-        return result
+            if char in dict:
+                top_element = check.pop() if check else '#'
+                if dict[char] != top_element:
+                    return False
+            else:
+                check.append(char)
+        return not check
     
 
 
